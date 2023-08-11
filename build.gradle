@@ -1,0 +1,49 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.7.14'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'org.zercok'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '11'
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    /* Spring Data JPA 는 엔티티 객체를 이용해서 JPA를 이용하는데 더욱 편리한 방법들을 제공하는 스프링 관련 라이브러리*/
+    /* Spring Data JPA 는 자동으로 객체를 생성하고 이를 통해서 예외처리 등을 자동으로 처리하는데 이를 위해서 */
+    /* 제공되는 인터페이스가 JpaRepository(CRUD 기능을 가지고 있다. 크리에이트 리드 업데이트 딜리트) 다. */
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    /* @Entitiy 쓰기 위해 */
+
+
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+
+
+    /* 테스트 에서 컴파일과 어노테이션을 쓸 수 있게 한다. */
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
